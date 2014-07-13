@@ -1,0 +1,6 @@
+PORT={{ memcached_port }}
+USER={{ memcached_user }}
+MAXCONN={{ memcached_maxconns }}
+CACHESIZE={{ memcached_memory }}
+OPTIONS="{{ memcached_options }}"
+INTERFACE={{ memcached_interface }}

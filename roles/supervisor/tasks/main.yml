@@ -1,0 +1,5 @@
+- name: supervisor | supervisor | Make sure supervisord is installed
+  yum: name=supervisor state=present 
+
+- name: supervisor_config | supervisor main configuration | main configuration for supervisord
+  template: dest={{ supervisor_main_config }} src=supervisord.conf

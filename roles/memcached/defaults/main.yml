@@ -1,0 +1,6 @@
+memcached_port: 11211
+memcached_maxconns: 1024
+memcached_user: nobody
+memcached_memory: 128
+memcached_options: -R 128
+memcached_interface: 0.0.0.0

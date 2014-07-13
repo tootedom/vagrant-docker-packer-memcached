@@ -1,0 +1,43 @@
+{
+  "variables": {
+    "version": "",
+    "playbook_root": "/vagrant/"
+  },
+  "builders": [{
+      "type": "docker",
+      "image": "centos:centos6",
+      "export_path": "centos-memcached.tar"
+  }],
+  "provisioners": [
+    {
+      "type": "file",
+      "source": "/tmp/memcached-1.4.17-0.el6.x86_64.rpm",
+      "destination": "/tmp/memcached-1.4.17-0.el6.x86_64.rpm"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "rpm -ivh http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm",
+        "yum -y update",
+        "yum -y install ansible python-setuptools",
+        "yum -y update gmp"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "{{user `playbook_root`}}/provisioning.yaml",
+      "role_paths":[
+        "{{user `playbook_root`}}/roles/memcached",
+        "{{user `playbook_root`}}/roles/supervisor"
+      ]
+    }
+  ],
+ "post-processors": [
+    {
+      "type": "docker-import",
+      "repository": "tootedom/centos-memcached",
+      "tag": "{{user `version`}}"
+    }
+  ]
+}
+

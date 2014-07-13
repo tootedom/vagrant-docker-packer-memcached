@@ -1,0 +1,12 @@
+
+- name: netcat | netcat | make sure netcat is installed for testing memcached
+  yum: name=nc state=present
+
+- name: memcached | memcached | Make sure memcached is installed
+  yum: name=/tmp/memcached-1.4.17-0.el6.x86_64.rpm state=present 
+
+- name: installing memcached start script
+  template: src=memcached-start.sh dest=/usr/bin/memcached-start.sh mode=0755
+
+- name: installing sysconfig configuration
+  template: src=memcached_config dest=/etc/sysconfig/memcached mode=0666
